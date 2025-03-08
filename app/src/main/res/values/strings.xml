@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Jetpack Compose</string>
+    <string name="tasks">Tasks</string>
+    <string name="pomodoro">Pomodoro</string>
+    <string name="stats">Stats</string>
+    <string name="select_date_time">Select date and time</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="priority">Priority:</string>
+    <string name="add_task">Add Task</string>
+    <string name="back">Back</string>
+    <string name="level">Level</string>
+    <string name="task_list">Task List</string>
+    <string name="deadline">Deadline:</string>
+    <string name="complete_all_the_information">Please complete all the information of the task</string>
+    <string name="the_number_of_task_reach_limit">The number of tasks has reached the limit. Please complete the old task before adding another task.</string>
 </resources>
