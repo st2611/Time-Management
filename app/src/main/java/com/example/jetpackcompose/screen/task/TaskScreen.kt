@@ -5,8 +5,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.jetpackcompose.const.ADD_TASK_SCREEN
-import com.example.jetpackcompose.const.DISPLAY_TASK_SCREEN
+import com.example.jetpackcompose.constval.ADD_TASK_SCREEN
+import com.example.jetpackcompose.constval.DISPLAY_TASK_SCREEN
 import com.example.jetpackcompose.viewmodel.TaskViewModel
 
 @Composable
