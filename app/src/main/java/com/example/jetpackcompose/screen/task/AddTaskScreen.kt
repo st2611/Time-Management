@@ -3,15 +3,16 @@ package com.example.jetpackcompose.screen.task
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.OutlinedTextField
@@ -24,12 +25,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.jetpackcompose.R
-import com.example.jetpackcompose.const.FORMAT_DATE
+import com.example.jetpackcompose.constval.FORMAT_DATE
 import com.example.jetpackcompose.toast.showCustomToast
+import com.example.jetpackcompose.viewcommon.CommonButton
 import com.example.jetpackcompose.viewmodel.TaskViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -50,10 +53,13 @@ fun AddTaskScreen(
     val formattedDueDate = dueDate?.let {
         SimpleDateFormat(FORMAT_DATE, Locale.getDefault()).format(Date(it))
     } ?: stringResource(id = R.string.select_date_time)
-
     val isFormValid = title.isNotBlank() && description.isNotBlank() && dueDate != null
+    val context = LocalContext.current
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(
+        modifier = Modifier.padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(30.dp)
+    ) {
         OutlinedTextField(
             value = title,
             onValueChange = { title = it },
@@ -77,21 +83,17 @@ fun AddTaskScreen(
             )
         }
 
-        val context = LocalContext.current
-
-        Button(
+        CommonButton(
+            text = formattedDueDate,
             onClick = {
                 showDatePicker(context, calendar) { selectedTime ->
                     dueDate = selectedTime
                 }
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(formattedDueDate)
-        }
+            }
+        )
 
-
-        Button(
+        CommonButton(
+            text = stringResource(id = R.string.add_task),
             onClick = {
                 if (isFormValid) {
                     viewModel.addTask(title, description.ifBlank { null }, priority, dueDate)
@@ -99,23 +101,13 @@ fun AddTaskScreen(
                 } else {
                     context.showCustomToast(context.getString(R.string.complete_all_the_information), isLong = true)
                 }
+            }
+        )
 
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(stringResource(id = R.string.add_task))
-        }
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Button(
-            onClick = {
-                onNavigateToDisplayTask()
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(stringResource(id = R.string.back))
-        }
+        CommonButton(
+            text = stringResource(id = R.string.back),
+            onClick = { onNavigateToDisplayTask() }
+        )
     }
 }
 
@@ -125,7 +117,10 @@ fun DropdownMenuComponent(selectedPriority: Int, onPrioritySelected: (Int) -> Un
     val priorities = listOf(1, 2, 3)
 
     Box {
-        Button(onClick = { expanded = true }) {
+        Button(onClick = { expanded = true },  colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF4CAF50),
+            contentColor = Color.White
+        )) {
             Text("${stringResource(id = R.string.priority)} $selectedPriority")
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {

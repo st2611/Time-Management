@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.pager.HorizontalPager
@@ -27,12 +28,21 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(navController: NavHostController) {
     val tabs = MainTab.entries.toTypedArray()
-    val pagerState = rememberPagerState(pageCount = {tabs.size})
+    val pagerState = rememberPagerState(pageCount = { tabs.size })
     val coroutineScope = rememberCoroutineScope()
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(WindowInsets.statusBars.asPaddingValues())) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                top = WindowInsets.statusBars
+                    .asPaddingValues()
+                    .calculateTopPadding(),
+                bottom = WindowInsets.navigationBars
+                    .asPaddingValues()
+                    .calculateBottomPadding()
+            )
+    ) {
         //Tab Layout
         TabRow(selectedTabIndex = pagerState.currentPage) {
             tabs.forEachIndexed { index, tab ->
@@ -49,7 +59,7 @@ fun MainScreen(navController: NavHostController) {
 
         // Content of each tab
         HorizontalPager(state = pagerState) { page ->
-            when(tabs[page]) {
+            when (tabs[page]) {
                 MainTab.TASKS -> TaskScreen(navController = navController)
                 MainTab.POMODORO -> PomodoroScreen()
                 MainTab.STATS -> StatsScreen()
