@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Jetpack Compose</string>
+    <string name="app_name">Time Management</string>
     <string name="tasks">Tasks</string>
     <string name="pomodoro">Pomodoro</string>
     <string name="stats">Stats</string>
@@ -18,7 +18,7 @@
     <string name="stop_pomodoro">Stop Pomodoro</string>
     <string name="start_pomodoro">Start Pomodoro</string>
     <string name="reset">Reset</string>
-    <string name="completed_pomodoro">Completed Pomodoro</string>
+    <string name="completed_pomodoro">Completed Pomodoro:</string>
     <string name="view_in">View in</string>
     <string name="last_day">Last %d days</string>
     <string name="day">days</string>

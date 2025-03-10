@@ -89,7 +89,7 @@ fun PomodoroScreen(viewModel: PomodoroViewModel = hiltViewModel()) {
             modifier = Modifier.width(300.dp)
         )
 
-        Text("${stringResource(id = R.string.completed_pomodoro)} $pomodoroCount", fontSize = 20.sp)
+        Text("${stringResource(id = R.string.completed_pomodoro)} $pomodoroCount", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold)
 
         Box (
             modifier = Modifier.width(200.dp),
