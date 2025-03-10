@@ -121,7 +121,7 @@ fun DropdownMenuComponent(selectedPriority: Int, onPrioritySelected: (Int) -> Un
             containerColor = Color(0xFF4CAF50),
             contentColor = Color.White
         )) {
-            Text("${stringResource(id = R.string.priority)} $selectedPriority")
+            Text("${stringResource(id = R.string.level)} $selectedPriority")
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             priorities.forEach { priority ->

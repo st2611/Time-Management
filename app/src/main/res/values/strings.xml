@@ -14,4 +14,16 @@
     <string name="deadline">Deadline:</string>
     <string name="complete_all_the_information">Please complete all the information of the task</string>
     <string name="the_number_of_task_reach_limit">The number of tasks has reached the limit. Please complete the old task before adding another task.</string>
+
+    <string name="stop_pomodoro">Stop Pomodoro</string>
+    <string name="start_pomodoro">Start Pomodoro</string>
+    <string name="reset">Reset</string>
+    <string name="completed_pomodoro">Completed Pomodoro</string>
+    <string name="view_in">View in</string>
+    <string name="last_day">Last %d days</string>
+    <string name="day">days</string>
+    <string name="time_of_pomodoro">Time of Pomodoro</string>
+    <string name="second">second</string>
+    <string name="what_is_pomodoro_technique">What is the Pomodoro Technique?</string>
+
 </resources>
