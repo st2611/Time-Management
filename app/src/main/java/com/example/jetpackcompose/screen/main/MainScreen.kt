@@ -17,6 +17,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.example.jetpackcompose.screen.pomodoro.PomodoroScreen
@@ -28,8 +30,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(navController: NavHostController) {
     val tabs = MainTab.entries.toTypedArray()
-    val pagerState = rememberPagerState(pageCount = { tabs.size })
+    val initialTabIndex = tabs.indexOf(MainTab.TASKS)
+    val pagerState = rememberPagerState(pageCount = { tabs.size }, initialPage = initialTabIndex)
     val coroutineScope = rememberCoroutineScope()
+
 
     Column(
         modifier = Modifier
@@ -51,14 +55,14 @@ fun MainScreen(navController: NavHostController) {
                     onClick = {
                         coroutineScope.launch { pagerState.animateScrollToPage(index) }
                     },
-                    text = { Text(text = stringResource(id = tab.title)) },
-                    icon = { Icon(tab.icon, contentDescription = stringResource(id = tab.title)) }
+                    text = { Text(text = stringResource(id = tab.title), color = Color.DarkGray) },
+                    icon = { Icon(painter = painterResource(id = tab.iconRes), contentDescription = stringResource(id = tab.title), tint = Color.DarkGray) }
                 )
             }
         }
 
         // Content of each tab
-        HorizontalPager(state = pagerState) { page ->
+        HorizontalPager(state = pagerState, userScrollEnabled = false) { page ->
             when (tabs[page]) {
                 MainTab.TASKS -> TaskScreen(navController = navController)
                 MainTab.POMODORO -> PomodoroScreen()

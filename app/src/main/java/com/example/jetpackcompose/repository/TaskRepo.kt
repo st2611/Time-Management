@@ -17,11 +17,11 @@ class TaskRepository @Inject constructor(private val taskDao: TaskDao) {
 
     fun getInCompletedTaskCount(): Flow<Int> = taskDao.getInCompletedTaskCount()
 
-    fun getCompletedTaskCount(): Flow<Int> = taskDao.getCompletedTaskCount()
+    suspend fun deleteOldCompletedTasks(threshold: Long) = taskDao.deleteOldCompletedTasks(threshold)
 
-    suspend fun getOldestCompletedTask(): TaskEntity? {
-        return taskDao.getOldestCompletedTask()
+    fun getCompletedTasksInDays(days: Int): Flow<List<TaskEntity>> {
+        val currentTime = System.currentTimeMillis()
+        return taskDao.getCompletedTasksInDays(currentTime, days)
     }
-
 
 }

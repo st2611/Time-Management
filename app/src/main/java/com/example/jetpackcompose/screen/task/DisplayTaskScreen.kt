@@ -28,7 +28,6 @@ fun DisplayTaskScreen(
 ) {
     val tasks by viewModel.tasks.collectAsState()
     val incompleteTaskCount by viewModel.incompleteTaskCount.collectAsState()
-    val completedTaskCount by viewModel.completedTaskCount.collectAsState()
     val currentTime by viewModel.currentTime.collectAsState()
     val context = LocalContext.current
 
@@ -59,7 +58,7 @@ fun DisplayTaskScreen(
                 TaskItem(
                     task,
                     currentTime = currentTime,
-                    onCompleted = { viewModel.markAsCompleted(task, completedTaskCount) },
+                    onCompleted = { viewModel.markAsCompleted(task) },
                     onDelete = { viewModel.deleteTask(task) })
             }
         }

@@ -66,9 +66,9 @@ fun PomodoroScreen(viewModel: PomodoroViewModel = hiltViewModel()) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .border(4.dp, Color.Green, shape = RoundedCornerShape(12.dp))
+                .border(4.dp, Color.Black, shape = RoundedCornerShape(12.dp))
                 .padding(4.dp)
-                .border(2.dp, Color.Green, shape = RoundedCornerShape(8.dp))
+                .border(2.dp, Color.Black, shape = RoundedCornerShape(8.dp))
                 .clip(RoundedCornerShape(8.dp))
                 .background(Color.White)
                 .padding(8.dp)
