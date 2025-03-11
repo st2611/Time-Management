@@ -18,6 +18,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,7 +38,12 @@ import java.util.Locale
 @Composable
 fun TaskItem(task: TaskEntity, currentTime: Long, onCompleted: () -> Unit, onDelete: () -> Unit) {
 
-    val isOverdue = task.dueDate != null && task.dueDate < currentTime && task.isCompleted == 0
+    val observedCurrentTime by remember {
+        derivedStateOf { if (task.isCompleted == 0) currentTime else 0L}
+    }
+
+    val isOverdue = task.dueDate != null && task.dueDate < observedCurrentTime && task.isCompleted == 0
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -122,6 +130,7 @@ fun TaskItem(task: TaskEntity, currentTime: Long, onCompleted: () -> Unit, onDel
                 Button(
                     onClick = onDelete,
                     modifier = Modifier.fillMaxWidth(),
+                    enabled = task.isCompleted == 0,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF4CAF50),
                         contentColor = Color.White

@@ -29,26 +29,26 @@ interface TaskDao {
     ORDER BY 
         isCompleted ASC, 
         CASE 
-            WHEN isCompleted = 0 AND dueDate < strftime('%s', 'now') * 1000 THEN 1 
+            WHEN isCompleted = 0 AND dueDate < strftime('%s', 'now') * 1000 THEN 1
             ELSE 0 
         END ASC,
         priority ASC,
         dueDate ASC
-        
 """
     )
     fun getAllTasks(): Flow<List<TaskEntity>>
 
-
-    @Query("SELECT * FROM tasks WHERE id = :taskId")
-    suspend fun getTaskById(taskId: Int): TaskEntity?
-
     @Query("SELECT COUNT (*) FROM tasks WHERE isCompleted = $INCOMPLETE_TASK")
     fun getInCompletedTaskCount(): Flow<Int>
 
-    @Query("SELECT COUNT (*) FROM tasks WHERE isCompleted = $COMPLETED_TASK")
-    fun getCompletedTaskCount(): Flow<Int>
+    @Query("DELETE FROM tasks WHERE dateCompleted < :threshold")
+    suspend fun deleteOldCompletedTasks(threshold: Long)
 
-    @Query("SELECT * FROM tasks WHERE isCompleted = $COMPLETED_TASK ORDER BY dueDate ASC LIMIT 1")
-    suspend fun getOldestCompletedTask(): TaskEntity?
+    @Query("""
+    SELECT * FROM tasks 
+    WHERE isCompleted = 1 
+    AND dateCompleted >= (:currentTime - (:days * 24 * 60 * 60 * 1000))
+""")
+    fun getCompletedTasksInDays(currentTime: Long, days: Int): Flow<List<TaskEntity>>
+
 }

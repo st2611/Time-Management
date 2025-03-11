@@ -96,7 +96,7 @@ fun AddTaskScreen(
             text = stringResource(id = R.string.add_task),
             onClick = {
                 if (isFormValid) {
-                    viewModel.addTask(title, description.ifBlank { null }, priority, dueDate)
+                    viewModel.addTask(title, description.ifBlank { null }, priority, dueDate, null)
                     onNavigateToDisplayTask()
                 } else {
                     context.showCustomToast(context.getString(R.string.complete_all_the_information), isLong = true)

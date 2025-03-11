@@ -1,15 +1,10 @@
 package com.example.jetpackcompose.screen.main
 
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.jetpackcompose.R
 
-enum class MainTab (@StringRes val title:Int, val icon: ImageVector) {
-    TASKS(R.string.tasks, Icons.Default.Menu),
-    POMODORO(R.string.pomodoro, Icons.Default.DateRange),
-    STATS(R.string.stats, Icons.Default.Build)
+enum class MainTab(@StringRes val title: Int, val iconRes: Int) {
+    POMODORO(R.string.pomodoro, R.drawable.baseline_access_time_24),
+    TASKS(R.string.tasks, R.drawable.baseline_task_alt_24),
+    STATS(R.string.stats, R.drawable.baseline_pie_chart_24)
 }

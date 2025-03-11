@@ -10,5 +10,6 @@ data class TaskEntity(
     val description: String?,
     val priority: Int, // 1 = High, 2 = Medium, 3 = Low
     val isCompleted: Int = 0, // 0: working, 1: completed
-    val dueDate: Long? // Timestamp
+    val dueDate: Long?, // Timestamp
+    val dateCompleted: Long?
 )
